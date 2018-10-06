@@ -1,0 +1,47 @@
+body {
+    font-family: serif;
+    text-align: center;
+}
+
+header {
+    font-size: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+p {
+    font-weight: 600;
+    font-style: italic;
+}
+
+canvas {
+    margin-bottom: 20px;
+}
+table {
+    margin: auto;
+}
+
+tr {
+   text-align: center;
+}
+
+tr:hover {
+    background: #3399FF;
+}
+
+.buttonAndValue {
+    display: inline-block;
+    width: 9%
+}
+
+#submitButton {
+    margin-top: 20px;
+}
+
+#listOfPreviousShots {
+    margin: auto;
+    width: 400px;
+    height: 200px;
+    overflow: scroll;
+}
