@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+
 @WebServlet("/AreaCheckServlet")
 public class AreaCheckServlet extends HttpServlet {
     @Override
