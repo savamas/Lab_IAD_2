@@ -93,17 +93,17 @@
       </form>
       <p>Previous shots:</p>
       <div id="listOfPreviousShots">
-        <table>
+        <table id="t1">
 
           <thead>
-             <td>X</td>
-             <td>Y</td>
-             <td>R</td>
-             <td>Is in area</td>
-             <td>Now</td>
+             <td><b>X</b></td>
+             <td><b>Y</b></td>
+             <td><b>R</b></td>
+             <td><b>Is in area</b></td>
+             <td><b>Now</b></td>
           </thead>
 
-          <tbody>
+          <tbody id="previousShoots">
             <%
               if (session.getAttribute("listOfHits") != null) {
               Hits listOfHits = (Hits) session.getAttribute("listOfHits");
@@ -112,8 +112,8 @@
                 Hit hit = listOfHits.getList().get(i);
               %>
             <tr>
-              <td><%=hit.getX()%></td>
-              <td><%=hit.getY()%></td>
+              <td class="previousX"><%=hit.getX()%></td>
+              <td class="previousY"><%=hit.getY()%></td>
               <td><%=hit.getR()%></td>
               <td><%=hit.isInArea() ? "Да" : "Нет"%></td>
               <td><%=hit.getShotTime()%></td>

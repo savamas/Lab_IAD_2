@@ -1,100 +1,40 @@
 $('document').ready(function () {
     var
         canv = $('canvas')[0],
-        ctx = canv.getContext('2d'),
-        R = "R";
+        ctx = canv.getContext('2d');
 
-// draw a figure
+    var xValues = [],
+        yValues = [];
+    var i = 0;
 
-    ctx.fillStyle = "#3399FF";
-    ctx.save();
-    ctx.translate(canv.width / 2, canv.height / 2);
-    ctx.scale(2, 1);
-    ctx.arc(0, 0, 60, 0, Math.PI * 2);
-    ctx.restore();
-    ctx.fill();
-    ctx.fillStyle = "white";
-    ctx.fillRect(150, 0 , 150, 150);
-    ctx.fillRect(0, 75, 150, 75);
-    ctx.fillStyle = "#3399FF";
-    ctx.fillRect(90, 75, 60, 60);
-    ctx.beginPath();
-    ctx.moveTo(150, 75);
-    ctx.lineTo(150, 105);
-    ctx.lineTo(210, 75);
-    ctx.closePath();
-    ctx.fill();
+    $('.previousX').each(function() {
+        xValues[i++] = parseFloat($(this).html());
+    });
 
-    ctx.fillStyle = "#000";
-    ctx.strokeRect(0, 0, 300, 150);
+    i = 0;
 
-//  Axis
+    $('.previousY').each(function() {
+        yValues[i++] = parseFloat($(this).html());
+    });
 
-    ctx.beginPath();
-    ctx.moveTo(150, 0);
-    ctx.lineTo(150, 150);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(0, 75);
-    ctx.lineTo(300, 75);
-    ctx.stroke();
-
-//  Arrows
-
-    ctx.beginPath();
-    ctx.moveTo(150, 0);
-    ctx.lineTo(145, 5);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(150, 0);
-    ctx.lineTo(155, 5);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(300, 75);
-    ctx.lineTo(293, 72);
-    ctx.stroke();
-
-    ctx.beginPath();
-    ctx.moveTo(300, 75);
-    ctx.lineTo(293, 78);
-    ctx.stroke();
-
-//  Tips
-
-    for (i = 30; i <= 270; i+=60){
-        ctx.beginPath();
-        ctx.moveTo(i, 72);
-        ctx.lineTo(i, 78);
-        ctx.stroke();
-    }
-    ctx.font = "9px Arial";
-    ctx.fillText(R + "/2", 203, 72);
-    ctx.fillText(R, 267, 72);
-    ctx.fillText("-" + R + "/2", 81,72);
-    ctx.fillText("-" + R, 25, 72);
-
-    for(i = 15; i <= 135; i+=30) {
-        ctx.beginPath();
-        ctx.moveTo(147, i);
-        ctx.lineTo(153, i);
-        ctx.stroke();
-    }
-    ctx.fillText(R,154, 18);
-    ctx.fillText(R + "/2",154, 48);
-    ctx.fillText("-" + R + "/2",154, 108);
-    ctx.fillText("-" + R,154, 138);
-
-//  form validation
+    clearChart(ctx, canv);
+    drawPreviousShoots(xValues, yValues, ctx);
 
     $('input:button').click(function(){
         if ($('input:button').not(this).prop('disabled') == true) {
             $('input:button').not(this).prop('disabled', false);
-
+            clearChart(ctx, canv);
         }
-        else $('input:button').not(this).prop('disabled', true);
+        else {
+            $('input:button').not(this).prop('disabled', true);
+            drawArea(this.value, ctx, canv);
+            drawAxis(ctx);
+            drawArrows(ctx);
+            drawTips(ctx);
+            drawXValues(ctx);
+            drawYValues(ctx);
+        }
+        drawPreviousShoots(xValues, yValues, ctx);
         document.getElementsByName("hidden_field_R")[0].value = this.value;
     });
 
@@ -143,8 +83,8 @@ $('document').ready(function () {
             ctx.beginPath();
             ctx.arc(x1, y1, 2, 0, Math.PI * 2);
             ctx.fill();
-            document.getElementsByName("hidden_field_X")[0].value = (x1-150)/60*(document.getElementsByName("hidden_field_R")[0].value);
-            $("#y_value").val((75-y1)/30*document.getElementsByName("hidden_field_R")[0].value);
+            document.getElementsByName("hidden_field_X")[0].value = (x1-150)/20;
+            $("#y_value").val((75-y1)/20);
             var x_value = parseFloat(document.getElementsByName("hidden_field_X")[0].value);
             x_value = x_value.toFixed(5);
             document.getElementsByName("hidden_field_X")[0].value = x_value;
@@ -172,3 +112,117 @@ $('document').ready(function () {
         else return true;
     };
 });
+
+function drawAxis(ctx){
+    ctx.beginPath();
+    ctx.moveTo(150, 0);
+    ctx.lineTo(150, 150);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(0, 75);
+    ctx.lineTo(300, 75);
+    ctx.stroke();
+}
+
+function drawArrows(ctx){
+    ctx.beginPath();
+    ctx.moveTo(150, 0);
+    ctx.lineTo(145, 5);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(150, 0);
+    ctx.lineTo(155, 5);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(300, 75);
+    ctx.lineTo(293, 72);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(300, 75);
+    ctx.lineTo(293, 78);
+    ctx.stroke();
+}
+
+function drawTips(ctx) {
+    for (i = 10; i <= 290; i+=20){
+        ctx.beginPath();
+        ctx.moveTo(i, 72);
+        ctx.lineTo(i, 78);
+        ctx.stroke();
+    }
+    for(i = 15; i <= 135; i+=20) {
+        ctx.beginPath();
+        ctx.moveTo(147, i);
+        ctx.lineTo(153, i);
+        ctx.stroke();
+    }
+}
+
+function drawXValues(ctx) {
+    ctx.font = "9px Arial";
+    var x = -13;
+    for(i = -7; i<= 7; ++i) {
+        if (i != 0) {
+            ctx.fillText(i, x += 20, 72);
+        } else x+=20;
+    }
+}
+
+function drawYValues(ctx) {
+    ctx.font = "9px Arial";
+    var y = -3;
+    for(i = 3; i >= -3; --i) {
+        if (i != 0) {
+            ctx.fillText(i, 154, y+=20);
+        } else y+=20;
+    }
+}
+
+function drawArea(R, ctx, canv){
+    ctx.clearRect(0, 0, canv.width, canv.height);
+    ctx.fillStyle = "#3399FF";
+    ctx.save();
+    ctx.translate(canv.width / 2, canv.height / 2);
+    ctx.arc(0, 0, R * 20, 0, Math.PI * 2);
+    ctx.restore();
+    ctx.fill();
+    ctx.fillStyle = "white";
+    ctx.fillRect(150, 0 , 150, 150);
+    ctx.fillRect(0, 75, 150, 75);
+    ctx.fillStyle = "#000";
+    ctx.strokeRect(0, 0, 300, 150);
+    ctx.fillStyle = "#3399FF";
+    ctx.fillRect(150-(R/2)*20, 75, (R/2)*20, R*20);
+    ctx.beginPath();
+    ctx.moveTo(150, 75);
+    ctx.lineTo(150, 75+(R/2)*20);
+    ctx.lineTo(150+(R/2)*20, 75);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = "#000";
+}
+
+function clearChart(ctx, canv) {
+    ctx.clearRect(0, 0, canv.width, canv.height);
+    ctx.fillStyle = "#000";
+    ctx.strokeRect(0, 0, 300, 150);
+    drawAxis(ctx);
+    drawArrows(ctx);
+    drawTips(ctx);
+    drawXValues(ctx);
+    drawYValues(ctx);
+}
+
+function drawPreviousShoots(xValues, yValues, ctx) {
+    ctx.fillStyle = "red";
+    for (i = 0; i< xValues.length; ++i){
+        ctx.beginPath();
+        ctx.arc(xValues[i] * 20 + 150, 75 - yValues[i] * 20, 2, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    ctx.fillStyle = "#000";
+}

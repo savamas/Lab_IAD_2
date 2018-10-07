@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Lab_IAD_2:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lab_IAD_2_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Lab_IAD_2" />
+          <element id="library" level="application" name="jquery-3.3.1" />
+        </element>
+      </element>
+      <element id="library" level="application" name="@types/jquery" />
+      <element id="library" level="project" name="jquery" />
+      <element id="javaee-facet-resources" facet="Lab_IAD_2/web/Web" />
+    </root>
+  </artifact>
+</component>
