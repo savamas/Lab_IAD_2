@@ -1,22 +1,32 @@
 package Bean;
 
-public class Hit {
+public class Hit implements Cloneable{
     private double X, Y, R;
     private boolean isInArea;
-    private String ShotTime;
-    public Hit(double X, double Y, double R, boolean isInArea) {
+    private String hitTime;
+
+    public Hit(double X, double Y, double R, boolean isInArea, String hitTime) {
         this.X = X;
         this.Y = Y;
         this.R = R;
         this.isInArea = isInArea;
+        this.hitTime = hitTime;
+    }
+
+    public String getHitTime() {
+        return hitTime;
+    }
+
+    public void setHitTime(String hitTime) {
+        this.hitTime = hitTime;
     }
 
     public String getShotTime() {
-        return ShotTime;
+        return hitTime;
     }
 
     public void setShotTime(String shotTime) {
-        ShotTime = shotTime;
+        hitTime = shotTime;
     }
 
     public double getX() {

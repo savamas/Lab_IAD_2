@@ -7,7 +7,7 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws java.io.IOException, ServletException{
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         HttpServletRequest req = (HttpServletRequest) servletRequest;
-        if (req.getQueryString() != ""){
+        if (!req.getRequestURL().toString().endsWith("/AreaCheckServlet")){
             filterChain.doFilter(servletRequest, servletResponse);
         }
         resp.sendRedirect("index.jsp");

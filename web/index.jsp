@@ -1,5 +1,5 @@
-<%@ page import="Bean.Hits" %>
-<%@ page import="Bean.Hit" %>
+<%@ page import="Bean.*" %>
+<%@ page import="java.util.Deque" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -91,8 +91,8 @@
         <input type="hidden" name="hidden_field_R" value="">
         <input type="hidden" name="hidden_field_X" value="">
       </form>
-      <p>Previous shots:</p>
-      <div id="listOfPreviousShots">
+      <p>Previous hits:</p>
+      <div id="previousHits">
         <table id="t1">
 
           <thead>
@@ -103,20 +103,20 @@
              <td><b>Now</b></td>
           </thead>
 
-          <tbody id="previousShoots">
+          <tbody>
             <%
-              if (session.getAttribute("listOfHits") != null) {
-              Hits listOfHits = (Hits) session.getAttribute("listOfHits");
-
-              for (int i = 0; i < listOfHits.getList().size(); ++i){
-                Hit hit = listOfHits.getList().get(i);
+              if (session.getAttribute("previousHits") != null) {
+                HitsHandler handler = (HitsHandler) session.getAttribute("previousHits");
+                Deque<Hit> previousHits = handler.getPreviousHits();
+                while(previousHits.peek() != null){
+                Hit currentHit = previousHits.pop();
               %>
             <tr>
-              <td class="previousX"><%=hit.getX()%></td>
-              <td class="previousY"><%=hit.getY()%></td>
-              <td><%=hit.getR()%></td>
-              <td><%=hit.isInArea() ? "Да" : "Нет"%></td>
-              <td><%=hit.getShotTime()%></td>
+              <td class="previousX"><%=currentHit.getX()%></td>
+              <td class="previousY"><%=currentHit.getY()%></td>
+              <td><%=currentHit.getR()%></td>
+              <td><%=currentHit.isInArea() ? "Да" : "Нет"%></td>
+              <td><%=currentHit.getHitTime()%></td>
             </tr>
             <%
               }

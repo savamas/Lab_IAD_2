@@ -1,8 +1,4 @@
-<%@ page import="java.util.List" %>
-<%@ page import="Bean.Hit" %>
-<%@ page import="Bean.Hits" %>
-<%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Calendar" %>
+<%@ page import="Bean.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,20 +15,15 @@
             border: 1px solid lime;
             text-align: center;
         }
-        tbody {
-            border: 1px solid lime;
-        }
-        thead {
+        tbody, thead {
             border: 1px solid lime;
         }
     </style>
 </head>
 <body>
     <%
-        Hits listOfHits = (Hits) session.getAttribute("listOfHits");
-        Hit hit = listOfHits.getList().get(listOfHits.getList().size() - 1);
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss").format(Calendar.getInstance().getTime());
-        hit.setShotTime(timeStamp);
+        HitsHandler handler = (HitsHandler) session.getAttribute("previousHits");
+        Hit hit = handler.getPreviousHits().getFirst();
     %>
 
     <table>
@@ -48,7 +39,7 @@
             <td><%=hit.getY()%></td>
             <td><%=hit.getR()%></td>
             <td><%=hit.isInArea() ? "Да" : "Нет"%></td>
-            <td><%=timeStamp%></td>
+            <td><%=hit.getShotTime()%></td>
         </tbody>
     </table>
 

@@ -23,5 +23,14 @@
     <orderEntry type="library" name="@types/jquery" level="application" />
     <orderEntry type="library" name="jquery" level="project" />
     <orderEntry type="library" name="jquery-3.3.1" level="application" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/commons-collections4-4.2-bin/commons-collections4-4.2/commons-collections4-4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
