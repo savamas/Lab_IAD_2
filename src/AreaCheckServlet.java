@@ -25,6 +25,7 @@ public class AreaCheckServlet extends HttpServlet {
         R = Double.parseDouble(req.getParameter("hidden_field_R"));
 
         boolean isInArea = true;
+
         if (X > 0 && Y > 0) isInArea = false;
         else if (X <= 0 && Y >= 0 && X*X + Y*Y <= R*R) isInArea = true;
         else if (X <= 0 && Y <= 0 && X >= -R/2 && Y >= -R) isInArea = true;
