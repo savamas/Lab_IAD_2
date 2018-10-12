@@ -39,7 +39,7 @@
             <td><%=hit.getY()%></td>
             <td><%=hit.getR()%></td>
             <td><%=hit.isInArea() ? "Да" : "Нет"%></td>
-            <td><%=hit.getShotTime()%></td>
+            <td><%=hit.getHitTime()%></td>
         </tbody>
     </table>
 

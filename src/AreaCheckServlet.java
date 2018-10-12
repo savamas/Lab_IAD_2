@@ -2,7 +2,6 @@ import Bean.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,13 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayDeque;
 import java.util.Calendar;
 
-@WebServlet("/AreaCheckServlet")
 public class AreaCheckServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         double X, Y, R;
-        HitsHandler handler;
-        ArrayDeque<Hit> previousHits;
 
         X = Double.parseDouble(req.getParameter("hidden_field_X"));
         Y = Double.parseDouble(req.getParameter("Y"));
@@ -34,6 +30,9 @@ public class AreaCheckServlet extends HttpServlet {
 
         Hit hit = new Hit(X, Y, R, isInArea, new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss").format(Calendar.getInstance().getTime()));
         HttpSession session = req.getSession();
+
+        HitsHandler handler;
+        ArrayDeque<Hit> previousHits;
 
         if (session.getAttribute("previousHits") == null) {
             handler = new HitsHandler();

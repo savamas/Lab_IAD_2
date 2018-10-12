@@ -2,8 +2,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.stream.DoubleStream;
 
-public class XYR_Validator implements IValidatable {
-    public boolean Validate(HttpServletRequest req){
+public class ValidatorXYR implements Validatable {
+    public boolean validate(HttpServletRequest req){
         Map<String, String[]> parameterMap = req.getParameterMap();
         for(String k : parameterMap.keySet()) {
             if (parameterMap.get(k).length != 1) return false;

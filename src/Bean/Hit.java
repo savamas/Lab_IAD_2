@@ -21,14 +21,6 @@ public class Hit implements Cloneable{
         this.hitTime = hitTime;
     }
 
-    public String getShotTime() {
-        return hitTime;
-    }
-
-    public void setShotTime(String shotTime) {
-        hitTime = shotTime;
-    }
-
     public double getX() {
         return X;
     }
