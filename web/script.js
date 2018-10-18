@@ -115,49 +115,49 @@ $('document').ready(function () {
 
 function drawAxis(ctx){
     ctx.beginPath();
-    ctx.moveTo(150, 0);
-    ctx.lineTo(150, 150);
+    ctx.moveTo(150.5, 0);
+    ctx.lineTo(150.5, 150);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(0, 75);
-    ctx.lineTo(300, 75);
+    ctx.moveTo(0, 75-0.5);
+    ctx.lineTo(300, 75-0.5);
     ctx.stroke();
 }
 
 function drawArrows(ctx){
     ctx.beginPath();
-    ctx.moveTo(150, 0);
-    ctx.lineTo(145, 5);
+    ctx.moveTo(150 + 0.5, 0);
+    ctx.lineTo(145 + 0.5, 5);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(150, 0);
-    ctx.lineTo(155, 5);
+    ctx.moveTo(150 + 0.5, 0);
+    ctx.lineTo(155 + 0.5, 5);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(300, 75);
-    ctx.lineTo(293, 72);
+    ctx.moveTo(300, 74.5);
+    ctx.lineTo(293, 71.5);
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.moveTo(300, 75);
-    ctx.lineTo(293, 78);
+    ctx.moveTo(300, 74.5);
+    ctx.lineTo(293, 77.5);
     ctx.stroke();
 }
 
 function drawTips(ctx) {
     for (i = 10; i <= 290; i+=20){
         ctx.beginPath();
-        ctx.moveTo(i, 72);
-        ctx.lineTo(i, 78);
+        ctx.moveTo(i+0.5, 72);
+        ctx.lineTo(i+0.5, 77);
         ctx.stroke();
     }
     for(i = 15; i <= 135; i+=20) {
         ctx.beginPath();
-        ctx.moveTo(147, i);
-        ctx.lineTo(153, i);
+        ctx.moveTo(148, i-0.5);
+        ctx.lineTo(153, i-0.5);
         ctx.stroke();
     }
 }
@@ -221,7 +221,7 @@ function drawPreviousShoots(xValues, yValues, ctx) {
     ctx.fillStyle = "red";
     for (i = 0; i< xValues.length; ++i){
         ctx.beginPath();
-        ctx.arc(xValues[i] * 20 + 150, 75 - yValues[i] * 20, 2, 0, Math.PI * 2);
+        ctx.arc(xValues[i] * 20 + 150+0.5, 75 - yValues[i] * 20 - 0.5, 1, 0, Math.PI * 2);
         ctx.fill();
     }
     ctx.fillStyle = "#000";
